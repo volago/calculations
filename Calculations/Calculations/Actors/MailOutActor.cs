@@ -1,11 +1,8 @@
 ﻿using Akka.Actor;
 using Calculations.Messages;
+using CalculationsHelpers;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace Calculations.Actors
 {
@@ -15,8 +12,8 @@ namespace Calculations.Actors
         {
             Receive<SendMail>(msg =>
                 {
-                    Thread.Sleep(500);
-                    Console.WriteLine("Sended e-mail to {0} with result {1}.", msg.To, msg.Result);
+                    Thread.Sleep(Config.MailOutDelayMs);
+                    Console.WriteLine("[MailOutActor       ]: E-mail to {0} with result {1} was sent.", msg.To, msg.Result);
                 });
         }
     }

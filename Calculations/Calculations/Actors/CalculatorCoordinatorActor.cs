@@ -1,6 +1,7 @@
 ﻿using Akka.Actor;
 using Akka.Routing;
 using Calculations.Messages;
+using CalculationsHelpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,7 @@ namespace Calculations.Actors
         protected override void PreStart()
         {
             _calculator = Context.ActorOf(Props.Create(() => new CalculatorActor())
-                .WithRouter(new RoundRobinPool(10)));
+                .WithRouter(new RoundRobinPool(Config.NumberOfCalculatorWorkers)));
 
             base.PreStart();
         }

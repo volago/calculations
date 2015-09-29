@@ -1,11 +1,8 @@
 ﻿using Akka.Actor;
 using Calculations.Messages;
+using CalculationsHelpers;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace Calculations.Actors
 {
@@ -16,21 +13,21 @@ namespace Calculations.Actors
             Receive<CalculateLoan>(msg =>
             {
                 var actorName = Context.Self.Path.Name;
-                Console.WriteLine("Calculating: {0}, {1} by actor {2}", msg.From, msg.LoanId, actorName);
+                Console.WriteLine("[CalculatorActor  {2}]: Start processing: from = {0}, loanId = {1}", msg.From, msg.LoanId, actorName);
 
-                var sleep = Helpers.GetRandomInt(1000, 10000);
+                var sleep = Helpers.GetRandomInt(Config.MessageProcessingTimeMinMs, Config.MessageProcessingTimeMaxMs);
                 Thread.Sleep(sleep);
 
-                var r = Helpers.GetRandomInt(0, 400);
+                var result = Helpers.GetRandomInt(Config.MaxResult);
                 
                 var mailBoxSize = ((ActorCell)Context).NumberOfMessages;
 
 
-                Console.WriteLine("Calculated: {0}, {1} by actor {2}, result = {3} ", msg.From, msg.LoanId, actorName, r);
-                Console.WriteLine("Inbox size: {0}", mailBoxSize);
+                Console.WriteLine("[CalculatorActor  {2}]: Stop processing: from = {0}, loanId = {1}, result = {3} ", msg.From, msg.LoanId, actorName, result);
+                Console.WriteLine("[CalculatorActor  {1}]: Inbox size: {0}", mailBoxSize, actorName);
 
                 var mailOutActor = Context.ActorSelection("akka://CalculationsSystem/user/mailOut");
-                mailOutActor.Tell(new SendMail(msg.From, r));
+                mailOutActor.Tell(new SendMail(msg.From, result));
             });
         }
     }

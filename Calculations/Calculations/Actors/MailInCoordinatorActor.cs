@@ -1,12 +1,7 @@
 ﻿using Akka.Actor;
 using Calculations.Messages;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Calculations.Actors
 {
@@ -36,12 +31,12 @@ namespace Calculations.Actors
                 {
                     if (x is SocketException)
                     {
-                        Console.WriteLine("Network exception - restarting MailInActor ...");
+                        Console.WriteLine("[MailInCoordinator   ]: Network exception - restarting MailInActor ...");
                         return Directive.Restart;                        
                     }
                     else
                     {
-                        Console.WriteLine("MailInActor crashed - stopping MailInActor ... further messages won't be process.");
+                        Console.WriteLine("[MailInCoordinator   ]: MailInActor crashed - stopping MailInActor ... further messages won't be process.");
                         Environment.Exit(2);
                         return Directive.Stop;
                     }

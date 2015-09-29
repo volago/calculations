@@ -54,7 +54,6 @@
     <Compile Include="Actors\MailInActor.cs" />
     <Compile Include="Actors\MailInCoordinatorActor.cs" />
     <Compile Include="Actors\MailOutActor.cs" />
-    <Compile Include="Helpers.cs" />
     <Compile Include="Messages\CalculateLoan.cs" />
     <Compile Include="Messages\CheckMail.cs" />
     <Compile Include="Messages\SendMail.cs" />
@@ -64,6 +63,12 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CalculationsHelpers\CalculationsHelpers.csproj">
+      <Project>{c1737c79-e82c-40d1-83d4-8dd126fff730}</Project>
+      <Name>CalculationsHelpers</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
