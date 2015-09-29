@@ -16,13 +16,13 @@ namespace Calculations
             var system = ActorSystem.Create("CalculationsSystem");
 
             var mailOutActor = system.ActorOf<MailOutActor>("mailOut");
-            var coordinator = system.ActorOf<CalculatorCoordinatorActor>("coordinator");
+            var calculatorCoordinatorActor = system.ActorOf<CalculatorCoordinatorActor>("calculatorCoordinator");
 
-            var mailInActor = system.ActorOf(Props.Create<MailInActor>(coordinator), "mailInActor");
+            var mailInCoordinatorActor = system.ActorOf(Props.Create<MailInCoordinatorActor>(calculatorCoordinatorActor), "mailInCoordinatorActor");
             var checkMailMsg = new CheckMail();
 
-            system.Scheduler.ScheduleTellRepeatedly(TimeSpan.FromSeconds(0), TimeSpan.FromSeconds(15),
-                mailInActor, checkMailMsg, ActorRefs.Nobody);
+            system.Scheduler.ScheduleTellRepeatedly(TimeSpan.FromSeconds(0), TimeSpan.FromMilliseconds(200),
+                mailInCoordinatorActor, checkMailMsg, ActorRefs.Nobody);
 
             Console.ReadKey();
         }

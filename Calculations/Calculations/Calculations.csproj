@@ -52,7 +52,9 @@
     <Compile Include="Actors\CalculatorActor.cs" />
     <Compile Include="Actors\CalculatorCoordinatorActor.cs" />
     <Compile Include="Actors\MailInActor.cs" />
+    <Compile Include="Actors\MailInCoordinatorActor.cs" />
     <Compile Include="Actors\MailOutActor.cs" />
+    <Compile Include="Helpers.cs" />
     <Compile Include="Messages\CalculateLoan.cs" />
     <Compile Include="Messages\CheckMail.cs" />
     <Compile Include="Messages\SendMail.cs" />
