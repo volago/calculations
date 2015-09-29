@@ -2,11 +2,11 @@
 
 namespace CalculationsHelpers
 {
-    public static class Config
+    public static class CalcConfig
     {
         // MailIn
         public static TimeSpan CheckMailStartDelay = TimeSpan.FromSeconds(0);
-        public static TimeSpan CheckMailInterval = TimeSpan.FromMilliseconds(1000);
+        public static TimeSpan CheckMailInterval = TimeSpan.FromMilliseconds(2000);
         public static int MaxNumberEmailsReceived = 10;
 
         public static int NetworkExceptionChance = 40000;

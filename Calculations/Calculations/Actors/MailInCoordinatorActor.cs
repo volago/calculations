@@ -9,16 +9,16 @@ namespace Calculations.Actors
         , IHandle<CheckMail>
     {
         private IActorRef _mailInActor;
-        private IActorRef _calculatorCoordinator;
+        private IActorRef _calculatorCommander;
 
-        public MailInCoordinatorActor(IActorRef calculatorCoordinator)
+        public MailInCoordinatorActor(IActorRef calculatorCommander)
         {
-            _calculatorCoordinator = calculatorCoordinator;
+            _calculatorCommander = calculatorCommander;
         }
 
         protected override void PreStart()
         {
-            _mailInActor = Context.ActorOf(Props.Create<MailInActor>(_calculatorCoordinator), "mailInActor");
+            _mailInActor = Context.ActorOf(Props.Create<MailInActor>(_calculatorCommander), "mailInActor");
             base.PreStart();
         }
 

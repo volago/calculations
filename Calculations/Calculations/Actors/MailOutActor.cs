@@ -12,7 +12,7 @@ namespace Calculations.Actors
         {
             Receive<SendMail>(msg =>
                 {
-                    Thread.Sleep(Config.MailOutDelayMs);
+                    Thread.Sleep(CalcConfig.MailOutDelayMs);
                     Console.WriteLine("[MailOutActor       ]: E-mail to {0} with result {1} was sent.", msg.To, msg.Result);
                 });
         }

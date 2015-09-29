@@ -8,30 +8,30 @@ namespace Calculations.Actors
 {
     public class MailInActor : ReceiveActor
     {
-        private IActorRef _coordinator;
+        private IActorRef commander;
 
-        public MailInActor(IActorRef coordinator)
+        public MailInActor(IActorRef commander)
         {
-            _coordinator = coordinator;
+            this.commander = commander;
 
             Receive<CheckMail>(m =>
             {
                 Console.Write("[MailInActor        ]: Checking e-mail inbox ...");
 
-                var ex = Helpers.GetRandomInt(Config.NetworkExceptionChance);
+                var ex = Helpers.GetRandomInt(CalcConfig.NetworkExceptionChance);
                 if (ex == 2)
                 {
                      throw new SocketException();
                 }
 
-                ex = Helpers.GetRandomInt(Config.FatalExceptionChance);
+                ex = Helpers.GetRandomInt(CalcConfig.FatalExceptionChance);
                 if (ex == 5)
                 {
                     throw new ArgumentNullException();
                 }
                 
                 // emulate receiving n e-mails
-                int n = Helpers.GetRandomInt(Config.MaxNumberEmailsReceived);
+                int n = Helpers.GetRandomInt(CalcConfig.MaxNumberEmailsReceived);
                 Console.WriteLine(" {0} e-mails found.", n);
 
                 for (int i = 0; i < n; i++)
@@ -39,7 +39,7 @@ namespace Calculations.Actors
                     var from = Helpers.GetRandomEmail();
                     var loanId = Helpers.GetRandomLoadId();
                     var calculationOrder = new CalculateLoan(from, loanId);
-                    _coordinator.Tell(calculationOrder);
+                    this.commander.Tell(calculationOrder);
                 }
             });
         }        

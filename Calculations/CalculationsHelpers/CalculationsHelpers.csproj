@@ -43,6 +43,11 @@
   <ItemGroup>
     <Compile Include="Config.cs" />
     <Compile Include="Helpers.cs" />
+    <Compile Include="Messages\CalculateLoan.cs" />
+    <Compile Include="Messages\CheckMail.cs" />
+    <Compile Include="Messages\ConnectRequest.cs" />
+    <Compile Include="Messages\JoinToSystem.cs" />
+    <Compile Include="Messages\SendMail.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
